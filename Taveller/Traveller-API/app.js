@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const placeRoutes = require("./routes/places-routes.js");
 const userRoutes = require("./routes/users-routes.js");
@@ -29,4 +30,14 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(5000);
+// Database Connection
+mongoose
+  .connect(
+    "mongodb+srv://admin:admin3189@cluster0.pog16.mongodb.net/traveller?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
